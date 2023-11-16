@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        #container {
+            margin: 20px auto;
+            padding: 20px;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        input[type="number"] {
+            width: 50px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Guess the Number Game</h1>
+        <p>Guess a number between 1 and 100:</p>
+        <input type="number" id="guess" min="1" max="100" required>
+        <button onclick="checkGuess()">Submit Guess</button>
+        <p>You have <span id="attempts">5</span> attempts remaining.</p>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        var guesses = 0;
+        
+        function checkGuess() {
+            var userGuess = document.getElementById('guess').value;
+            guesses++;
+        
+            if (userGuess == randomNumber) {
+                document.getElementById('result').innerHTML = "Congratulations! You got it right!";
+                endGame();
+            } else if (guesses == 5) {
+                document.getElementById('result').innerHTML = "Sorry, you didn't guess the number. The number was " + randomNumber;
+                endGame();
+            } else {
+                var msg = (userGuess > randomNumber) ? "Too high!" : "Too low!";
+                document.getElementById('result').innerHTML = msg + " Guesses made: " + guesses;
+            }
+        }
+        
+        function endGame() {
+            document.getElementById('userInput').innerHTML = "";
+        }
+        </script>
+</body>
+</html>
